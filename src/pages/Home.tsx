@@ -18,7 +18,7 @@ import {
 } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 
-function Home() {
+const Home: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
@@ -26,12 +26,12 @@ function Home() {
 
     const isMounted = React.useRef(false);
 
-    const onChangeCategory = (id) => {
+    const onChangeCategory = (id: number) => {
         dispatch(setCategoryId(id));
     };
 
-    const onChangePage = (number) => {
-        dispatch(setCurrentPage(number));
+    const onChangePage = (page: number) => {
+        dispatch(setCurrentPage(page));
     };
 
     const getPizzas = async () => {
@@ -41,6 +41,7 @@ function Home() {
         const search = searchValue ? `&search=${searchValue}` : '';
 
         dispatch(
+            // @ts-ignore
             fetchPizzas({
                 sortBy,
                 order,
@@ -83,7 +84,7 @@ function Home() {
         getPizzas();
     }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-    const pizzas = items.map((obj) => <PizzaBlock {...obj} />);
+    const pizzas = items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
     const skeletons = [...new Array(4)].map((_, index) => <Skeleton key={index} />);
 
     return (
@@ -96,7 +97,7 @@ function Home() {
             {status === 'error' ? (
                 <div className="content__error-info">
                     <h2>
-                        Произошла ошибка <icon>😕</icon>
+                        Произошла ошибка <span>😕</span>
                     </h2>
                     <p>К сожалению не удалось получить пиццы. Попробуйте повторить попытку позже</p>
                 </div>
@@ -106,6 +107,6 @@ function Home() {
             <Pagination currentPage={currentPage} onChangePage={onChangePage} />
         </div>
     );
-}
+};
 
 export default Home;

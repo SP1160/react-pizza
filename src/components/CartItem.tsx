@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { TCartItem, addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
 
@@ -24,13 +25,7 @@ const CartItem: React.FC<TCartItemProps> = ({ id, title, type, size, price, coun
     };
 
     const onClickMinus = () => {
-        if (count <= 1) {
-            if (window.confirm('Вы действительно хотите удалить товар?')) {
-                dispatch(removeItem(id));
-            }
-        } else {
-            dispatch(minusItem(id));
-        }
+        dispatch(minusItem(id));
     };
 
     const onClickRemove = () => {
@@ -52,6 +47,7 @@ const CartItem: React.FC<TCartItemProps> = ({ id, title, type, size, price, coun
             </div>
             <div className="cart__item-count">
                 <button
+                    disabled={count === 1}
                     onClick={onClickMinus}
                     className="button button--outline button--circle cart__item-count-minus">
                     <svg

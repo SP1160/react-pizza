@@ -10,14 +10,11 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import { sortList } from '../components/Sort';
 
-import {
-    selectFilter,
-    setCategoryId,
-    setCurrentPage,
-    setFilters,
-} from '../redux/slices/filterSlice';
-import { TSearchPizzaParams, fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 import { useAppDispatch } from '../redux/store';
+import { selectFilter } from '../redux/filter/selectors';
+import { selectPizzaData } from '../redux/pizza/selectors';
+import { setCategoryId, setCurrentPage } from '../redux/filter/slice';
+import { fetchPizzas } from '../redux/pizza/asyncAction';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();

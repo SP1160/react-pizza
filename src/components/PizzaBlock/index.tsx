@@ -5,9 +5,9 @@ import { selectCartItemById } from '../../redux/cart/selectors';
 import { TCartItem } from '../../redux/cart/types';
 import { addItem } from '../../redux/cart/slice';
 
-const typeNames = ['тонкое', 'традиционное'];
+export const typeNames = ['тонкое', 'традиционное'];
 
-type TPizzaBlockProps = {
+export type TPizzaBlockProps = {
     id: string;
     title: string;
     price: number;
@@ -16,7 +16,14 @@ type TPizzaBlockProps = {
     types: number[];
 };
 
-const PizzaBlock: React.FC<TPizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
+export const PizzaBlock: React.FC<TPizzaBlockProps> = ({
+    id,
+    title,
+    price,
+    imageUrl,
+    sizes,
+    types,
+}) => {
     const dispatch = useDispatch();
     const cartItem = useSelector(selectCartItemById(id));
     const [activeSize, setActiveSize] = React.useState(0);
@@ -88,5 +95,3 @@ const PizzaBlock: React.FC<TPizzaBlockProps> = ({ id, title, price, imageUrl, si
         </div>
     );
 };
-
-export default PizzaBlock;

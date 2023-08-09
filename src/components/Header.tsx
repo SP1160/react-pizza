@@ -1,17 +1,18 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import logoSvg from '../assets/img/pizza-logo.svg';
-import Search from './Search';
 import { selectCart } from '../redux/cart/selectors';
+import { Search } from '../components';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     const { items, totalPrice } = useSelector(selectCart);
     const location = useLocation();
     const isMounted = React.useRef(false);
+    const { id } = useParams();
 
-    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+    const totalCount = items.reduce((sum: number, item) => sum + item.count, 0);
 
     React.useEffect(() => {
         if (isMounted.current) {
@@ -33,7 +34,9 @@ const Header: React.FC = () => {
                         </div>
                     </div>
                 </Link>
-                {location.pathname !== '/cart' && <Search />}
+                {location.pathname !== '/cart' && location.pathname !== '/pizza/' + id && (
+                    <Search />
+                )}
                 <div className="header__cart">
                     {location.pathname !== '/cart' && (
                         <Link to="/cart" className="button button--cart">
@@ -75,5 +78,3 @@ const Header: React.FC = () => {
         </div>
     );
 };
-
-export default Header;

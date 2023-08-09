@@ -21,7 +21,7 @@ export const sortList: TSortItem[] = [
     { name: 'алфавиту (ASC)', sortProperty: SortPropertyEnum.TITLE_ASC },
 ];
 
-const Sort: React.FC<TSortProps> = React.memo(({ value }) => {
+export const Sort: React.FC<TSortProps> = React.memo(({ value }) => {
     const dispatch = useDispatch();
     const sortRef = React.useRef<HTMLDivElement>(null);
 
@@ -86,5 +86,3 @@ const Sort: React.FC<TSortProps> = React.memo(({ value }) => {
         </div>
     );
 });
-
-export default Sort;

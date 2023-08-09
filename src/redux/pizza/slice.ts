@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPizzaSliceState, Status, TPizza, TSearchPizzaParams } from './types';
+import { IPizzaSliceState, Status, TPizza } from './types';
 import { fetchPizzas } from './asyncAction';
 
 const initialState: IPizzaSliceState = {
